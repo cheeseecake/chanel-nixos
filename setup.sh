@@ -79,7 +79,7 @@ do_install() {
     mkdir -p /mnt/boot && mount /dev/disk/by-label/boot /mnt/boot
 
     # Pull latest config, will be preserved on install
-    git clone https://github.com/extrange/nixos-config "$nixos_config_dir"
+    git clone https://github.com/extrange/chanel-nixos "$nixos_config_dir"
     chown -R 1000 "$nixos_config_dir"
 
     # Generate hardware config
