@@ -206,8 +206,8 @@
 
     # Background
     "org/gnome/desktop/background" = {
-      picture-uri = "file:///home/user/.config/background";
-      picture-uri-dark = "file:///home/user/.config/background";
+      picture-uri = "file:///home/chanel/.config/background";
+      picture-uri-dark = "file:///home/chanel/.config/background";
       picture-options = "zoom";
     };
 

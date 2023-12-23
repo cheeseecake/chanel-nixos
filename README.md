@@ -38,6 +38,13 @@ Once installation is completed successfully, reboot.
 
 Edit `home.nix` and `system.nix` as necessary. Don't edit `hardware-configuration.nix`.
 
+After that:
+
+- To test (without modifying the default boot config): `sudo nixos-rebuild test --flake path:.#chanel`
+- To switch (write to boot record, will become default): `sudo nixos-rebuild switch --flake path:.#chanel`
+- To update the lockfile: `nix flake update`
+- To test in a VM: `sudo nixos-rebuild build-vm --flake path:.#chanel`
+
 ## References
 
 To find packages/option names, head to <https://search.nixos.org>.
