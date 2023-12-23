@@ -9,6 +9,11 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.allowUnfree = true;
 
+  # TEMPORARY WORKAROUND
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-25.9.0"
+  ];
+
   time.timeZone = "Asia/Singapore";
   i18n.defaultLocale = "en_SG.UTF-8";
   i18n.extraLocaleSettings = {
@@ -51,7 +56,7 @@
 
   # Display: enable automatic login for the user.
   services.xserver.displayManager.autoLogin.enable = true;
-  services.xserver.displayManager.autoLogin.user = "user";
+  services.xserver.displayManager.autoLogin.user = "chanel";
   # Workaround for GNOME autologin: https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
   systemd.services."getty@tty1".enable = false;
   systemd.services."autovt@tty1".enable = false;

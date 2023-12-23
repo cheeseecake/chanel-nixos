@@ -16,8 +16,9 @@
         modules = [
           ./system.nix
           home-manager.nixosModules.home-manager
+          { config._module.args = { inherit self; }; }
           {
-            home-manager.users.user = import ./home.nix;
+            home-manager.users.chanel = import ./home.nix;
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
           }

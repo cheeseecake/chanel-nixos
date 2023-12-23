@@ -184,11 +184,11 @@
       # Setup dash shortcuts
       favorite-apps = [
         "firefox.desktop"
-        "org.gnome.Console.desktop"
-        "obsidian.desktop"
         "org.gnome.Nautilus.desktop"
+        "com.logseq.Logseq.desktop"
         "code.desktop"
         "org.telegram.desktop.desktop"
+        "org.gnome.Console.desktop"
       ];
 
       # Enable extensions
