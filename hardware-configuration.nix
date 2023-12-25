@@ -8,30 +8,20 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" "sr_mod" ];
-  boot.initrd.kernelModules = [ "dm-snapshot" ];
+  boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "sd_mod" ];
+  boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/14f0667a-c2b5-4ed7-8142-36ef1541382c";
+    { device = "/dev/disk/by-uuid/456670e6-864a-4b87-a784-d41763ecaf17";
       fsType = "btrfs";
       options = [ "subvol=root" ];
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/CAF4-8230";
+    { device = "/dev/disk/by-uuid/FCA5-3DD6";
       fsType = "vfat";
-    };
-
-  fileSystems."/mnt/storage" =
-    { device = "ssh.nicholaslyz.com:/mnt/storage";
-      fsType = "fuse.sshfs";
-    };
-
-  fileSystems."/mnt/workspace" =
-    { device = "ssh.nicholaslyz.com:/home/user";
-      fsType = "fuse.sshfs";
     };
 
   swapDevices = [ ];
@@ -41,8 +31,7 @@
   # still possible to use this option, but it's recommended to use it in conjunction
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.eno1.useDHCP = lib.mkDefault true;
-  # networking.interfaces.tailscale0.useDHCP = lib.mkDefault true;
+  # networking.interfaces.wlp0s20f3.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
