@@ -22,10 +22,11 @@ Once installation is completed successfully, reboot.
 
 ## Post Install
 
+- Setup a password for your account: `su root`, then `passwd chanel`. This will enable `sudo`.
 - [Add your SSH key to Github][ssh-key].
   - Subsequently, clone packages with ssh, not https. E.g. `git clone git@github.com:extrange/chanel-nixos.git`
 - `git push` changes to `hardware-configuration.nix` for the respective host
-- Pull Firefox profile
+- Copy over previous Firefox profile
 - Setup logins (these can't be declaratively set)
   - Tailscale (Auth Key max expiry is 90 days)
   - Telegram
@@ -36,12 +37,14 @@ Once installation is completed successfully, reboot.
 
 ## Configuring
 
-Edit `home.nix` and `system.nix` as necessary. Don't edit `hardware-configuration.nix`.
+Edit `home.nix` and `system.nix` as necessary. Don't edit `hardware-configuration.nix` - this was automatically generated for your machine, and is specific for it.
+
+`home.nix` is where settings specific for the user are kept. This is actually managed by a separate NixOS module called [home-manager]. You can see options [here][home-manager-options].
 
 After that:
 
-- To test (without modifying the default boot config): `sudo nixos-rebuild test --flake path:.#chanel`
-- To switch (write to boot record, will become default): `sudo nixos-rebuild switch --flake path:.#chanel`
+- To test (this will not persist changes across boots): `sudo nixos-rebuild test --flake path:.#chanel`
+- To switch (write to boot record, will persist across boots): `sudo nixos-rebuild switch --flake path:.#chanel`
 - To update the lockfile: `nix flake update`
 - To test in a VM: `sudo nixos-rebuild build-vm --flake path:.#chanel`
 
@@ -49,9 +52,16 @@ After that:
 
 To find packages/option names, head to <https://search.nixos.org>.
 
+An explanation of common options (for the system, or `system.nix`) is [here][nixos-config].
+
 To learn about the Nix language, check out <https://nix.dev/tutorials/nix-language.html>.
 
 To learn more about Nix in general, see <https://nixos.org/manual/nix/stable>.
 
 [ssh-key]: https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account
 [installer]: https://channels.nixos.org/nixos-23.11/latest-nixos-minimal-x86_64-linux.iso
+[automatic login]: https://askubuntu.com/questions/1352398/asking-for-password-when-i-open-vscode-for-the-first-time
+[password]: https://askubuntu.com/questions/24770/gnome-keyring-keeps-asking-for-a-password-that-doesnt-exist/24773#24773
+[nixos-config]: https://nixos.org/manual/nixos/stable/#ch-configuration
+[home-manager]: https://nix-community.github.io/home-manager/
+[home-manager-options]: https://nix-community.github.io/home-manager/options.xhtml
