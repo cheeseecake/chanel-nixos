@@ -5,6 +5,7 @@
 { config, pkgs, lib, self, hostname, ... }:
 
 {
+
   # Nix
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.allowUnfree = true;
@@ -32,15 +33,37 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   zramSwap.enable = true;
-
+  
   # Virtualization
   # virtualisation.libvirtd.enable = true;
   # programs.virt-manager.enable = true;
-
-  # Decrease shutdown timer
-  systemd.extraConfig = ''
-    DefaultTimeoutStopSec=15s
-  '';
+  # virtualisation.spiceUSBRedirection.enable = true;
+  ## Install necessary packages
+  environment.systemPackages = with pkgs; [
+    virtiofsd
+    virt-manager
+    virt-viewer
+    spice spice-gtk
+    spice-protocol
+    win-virtio
+    win-spice
+    gnome.adwaita-icon-theme
+  ];
+  ## Manage the virtualisation services
+  virtualisation = {
+    libvirtd = {
+      enable = true;
+      qemu = {
+        swtpm.enable = true;
+        ovmf.enable = true;
+        ovmf.packages = [ pkgs.OVMFFull.fd ];
+      };
+    };
+    spiceUSBRedirection.enable = true;
+  };
+  ## Enable dconf (System Management Tool)
+  programs.dconf.enable = true;
+  services.spice-vdagentd.enable = true;
 
   # Increase sudo timeout
   security.sudo.extraConfig = "Defaults timestamp_timeout=30";
@@ -76,7 +99,7 @@
     users.chanel = {
       isNormalUser = true;
       description = "chanel";
-      extraGroups = [ "networkmanager" "wheel" ];
+      extraGroups = [ "networkmanager" "wheel" "libvirtd" ];
     };
   };
 
@@ -139,4 +162,6 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.05"; # Did you read the comment?
+
+
 }

@@ -38,7 +38,7 @@
       telegram-desktop
       ungoogled-chromium
       vlc
-      whatsapp-for-linux
+      vscode
       zoom-us
 
       # Gnome Extensions
@@ -94,6 +94,7 @@
       tree
       unzip
       usbutils # lsusb
+      vim
       which
       xz
       yt-dlp
@@ -152,7 +153,7 @@
 
     "org/gnome/settings-daemon/plugins/color" = {
       night-light-enabled = true;
-      night-light-temperature = mkUint32 1700;
+      night-light-temperature = mkUint32 2500;
     };
 
     "org/gnome/desktop/interface" = {
@@ -165,16 +166,6 @@
       switch-windows = [ "<alt>Tab" ];
     };
 
-    # Open terminal with Ctrl + Alt + T
-    # "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
-    #   binding = "<Control><Alt>t";
-    #   command = "kgx";
-    #   name = "Launch terminal";
-    # };
-    # "org/gnome/settings-daemon/plugins/media-keys" = {
-    #   custom-keybindings = [ "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/" ];
-    # };
-
     # Show thumbnails on SSH drives
     "org/gnome/nautilus/preferences" = {
       show-image-thumbnails = "always";
@@ -185,7 +176,7 @@
       favorite-apps = [
         "firefox.desktop"
         "org.gnome.Nautilus.desktop"
-        "com.logseq.Logseq.desktop"
+        "logseq.desktop"
         "code.desktop"
         "org.telegram.desktop.desktop"
         "org.gnome.Console.desktop"

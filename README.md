@@ -34,6 +34,8 @@ Once installation is completed successfully, reboot.
 - Syncthing: configure folders, add device to server
 - GSConnect pairing
 - VSCode settings sync (note: due to [automatic login], the keyring is not unlocked. However, it is possible to use a insecure storage and disable the [password].)
+- Virtual Machine Manager: download Windows ISO to create Windows guest. Create and [share folder with windows guest].
+- Calibre: install DeDRM plugin
 
 ## Configuring
 
@@ -47,6 +49,7 @@ After that:
 - To switch (write to boot record, will persist across boots): `sudo nixos-rebuild switch --flake path:.#chanel`
 - To update the lockfile: `nix flake update`
 - To test in a VM: `sudo nixos-rebuild build-vm --flake path:.#chanel`
+
 
 ## References
 
@@ -62,6 +65,7 @@ To learn more about Nix in general, see <https://nixos.org/manual/nix/stable>.
 [installer]: https://channels.nixos.org/nixos-23.11/latest-nixos-minimal-x86_64-linux.iso
 [automatic login]: https://askubuntu.com/questions/1352398/asking-for-password-when-i-open-vscode-for-the-first-time
 [password]: https://askubuntu.com/questions/24770/gnome-keyring-keeps-asking-for-a-password-that-doesnt-exist/24773#24773
+[share folder with windows guest]: https://www.debugpoint.com/kvm-share-folder-windows-guest/
 [nixos-config]: https://nixos.org/manual/nixos/stable/#ch-configuration
 [home-manager]: https://nix-community.github.io/home-manager/
 [home-manager-options]: https://nix-community.github.io/home-manager/options.xhtml
