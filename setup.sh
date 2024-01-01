@@ -16,14 +16,13 @@ if [[ "$EUID" -ne 0 ]]; then
 fi
 
 # User confirmation
-printf "This script will setup a primary Btrfs partition and install Nix."
-printf "${RED}All data in %s will be deleted!${NC}\n\n" "$target"
+printf "This script will setup a primary Btrfs partition and install Nix.\n\n"
+
+read -rp "Enter target disk (e.g. /dev/sda): " target
+
+printf "\n\n${RED}All data in %s will be deleted!${NC}\n\n" "$target"
 printf "Press \033[1mCtrl+C\033[0m now to abort this script, or wait 5s for the installation to continue.\n\n"
 sleep 5
-
-printf "Available disks:\n\n%s\n\n" "$(lsblk -o NAME,SIZE,MODEL,TYPE | grep -Ei 'disk|type')"
-
-read -rp "Enter target disk (e.g. /dev/sda, /dev/nvme0n1): " target
 
 if [[ ! -b "$target" ]]; then
     printf "'%s' is not a valid block device, aborting\n" "$target"
@@ -62,8 +61,8 @@ do_install() {
     # Create primary partition
     parted -s "$target" -- mkpart primary 512MiB 100%
 
-    boot=$(lsblk "${target}" -lno path | sed -n 2p)
-    primary=$(lsblk "${target}" -lno path | sed -n 3p)
+    boot="${target}1"
+    primary="${target}2"
 
     # Format disks
     mkfs.fat -F 32 -n boot "$boot"
@@ -102,7 +101,7 @@ do_install() {
     set +euo pipefail
 
     # Install
-    nixos-install --flake path:"$nixos_config_dir#$hostname"
+    nixos-install --no-root-passwd --flake path:"$nixos_config_dir#$hostname"
 
 }
 
