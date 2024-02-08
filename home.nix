@@ -39,15 +39,15 @@
       ungoogled-chromium
       vlc
       (vscode.overrideAttrs rec {
-          version = "1.85.2";
-          plat = "linux-x64";
-          archive_fmt = "tar.gz";
-          src = fetchurl {
-            name = "VSCode_${version}_${plat}.${archive_fmt}";
-            url = "https://update.code.visualstudio.com/${version}/${plat}/stable";
-            sha256 = "ipOV1Cx0RkcDa/HEBrACL4YmtA8i3fzC5jmctLcV4Gw=";
-          };
-        })
+        version = "1.85.2";
+        plat = "linux-x64";
+        archive_fmt = "tar.gz";
+        src = fetchurl {
+          name = "VSCode_${version}_${plat}.${archive_fmt}";
+          url = "https://update.code.visualstudio.com/${version}/${plat}/stable";
+          sha256 = "ipOV1Cx0RkcDa/HEBrACL4YmtA8i3fzC5jmctLcV4Gw=";
+        };
+      })
 
       zoom-us
 
@@ -127,6 +127,7 @@
 
     # Prettier shell prompt
     starship.enable = true;
+  };
 
   # Gnome settings
   # Run `dconf watch /` and change a setting to find its path
@@ -197,8 +198,10 @@
     };
   };
 
+
   # Run as user, ivo possible permission issues if run as system
   services.syncthing.enable = true;
 
   home.stateVersion = "24.05";
+
 }
