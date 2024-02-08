@@ -38,7 +38,17 @@
       telegram-desktop
       ungoogled-chromium
       vlc
-      vscode
+      (vscode.overrideAttrs rec {
+          version = "1.85.2";
+          plat = "linux-x64";
+          archive_fmt = "tar.gz";
+          src = fetchurl {
+            name = "VSCode_${version}_${plat}.${archive_fmt}";
+            url = "https://update.code.visualstudio.com/${version}/${plat}/stable";
+            sha256 = "ipOV1Cx0RkcDa/HEBrACL4YmtA8i3fzC5jmctLcV4Gw=";
+          };
+        })
+
       zoom-us
 
       # Gnome Extensions
@@ -115,33 +125,8 @@
 
     home-manager.enable = true;
 
-    # git = {
-    #   enable = true;
-    #   userEmail = "29305375+extrange@users.noreply.github.com";
-    #   userName = "extrange";
-    # };
-
     # Prettier shell prompt
     starship.enable = true;
-
-    # ssh = {
-    #   enable = true;
-    #   # ~.ssh/config
-    #   matchBlocks = let hostname = "ssh.nicholaslyz.com"; in {
-    #     server = {
-    #       host = "server ${hostname}";
-    #       inherit hostname;
-    #       port = 39483;
-    #       user = "user";
-    #     };
-    #     chanel = let hostname = "chanel-server.tail14cd7.ts.net"; in {
-    #       host = "chanel ${hostname}";
-    #       inherit hostname;
-    #       user = "chanel";
-    #     };
-    #   };
-    # };
-  };
 
   # Gnome settings
   # Run `dconf watch /` and change a setting to find its path
