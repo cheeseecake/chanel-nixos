@@ -15,6 +15,12 @@
     "electron-25.9.0"
   ];
 
+  # GPU
+  hardware.opengl.extraPackages = with pkgs; [
+    intel-media-driver
+    intel-compute-runtime
+  ];
+
   time.timeZone = "Asia/Singapore";
   i18n.defaultLocale = "en_SG.UTF-8";
   i18n.extraLocaleSettings = {
