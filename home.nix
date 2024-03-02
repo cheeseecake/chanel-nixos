@@ -38,16 +38,17 @@
       telegram-desktop
       ungoogled-chromium
       vlc
-      (vscode.overrideAttrs rec {
-        version = "1.85.2";
-        plat = "linux-x64";
-        archive_fmt = "tar.gz";
-        src = fetchurl {
-          name = "VSCode_${version}_${plat}.${archive_fmt}";
-          url = "https://update.code.visualstudio.com/${version}/${plat}/stable";
-          sha256 = "ipOV1Cx0RkcDa/HEBrACL4YmtA8i3fzC5jmctLcV4Gw=";
-        };
-      })
+      vscode
+      # (vscode.overrideAttrs rec {
+      #   version = "1.85.2";
+      #   plat = "linux-x64";
+      #   archive_fmt = "tar.gz";
+      #   src = fetchurl {
+      #     name = "VSCode_${version}_${plat}.${archive_fmt}";
+      #     url = "https://update.code.visualstudio.com/${version}/${plat}/stable";
+      #     sha256 = "ipOV1Cx0RkcDa/HEBrACL4YmtA8i3fzC5jmctLcV4Gw=";
+      #   };
+      # })
 
       zoom-us
 
