@@ -22,7 +22,7 @@
                 ./system.nix
                 ./hosts/${hostname}/hardware-configuration.nix
                 home-manager.nixosModules.home-manager
-                { config._module.args = { inherit self; }; }
+                { config._module.args = { inherit hostname self; }; }
                 {
                   home-manager.users.chanel = import ./home.nix;
                   home-manager.useGlobalPkgs = true;

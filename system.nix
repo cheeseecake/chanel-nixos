@@ -75,8 +75,11 @@
   security.sudo.extraConfig = "Defaults timestamp_timeout=30";
 
   # Network
-  networking.hostName = "chanel";
+  networking.hostName = hostname;
   networking.networkmanager.enable = true;
+
+  # Printing
+  services.printing.enable = true;
 
   # Display
   services.xserver.enable = true;
