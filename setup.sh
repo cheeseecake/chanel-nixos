@@ -90,7 +90,7 @@ do_install() {
     rm /mnt/etc/nixos/configuration.nix
 
     # Move hardware config
-    mv /mnt/etc/nixos/hardware-configuration.nix "$nixos_config_dir"
+    mv /mnt/etc/nixos/hardware-configuration.nix "$nixos_config_dir/hosts/$hostname"
 
     clear
     lsblk
