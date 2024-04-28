@@ -7,7 +7,7 @@ RED='\033[0;31m'
 NC='\033[0m' # No Color
 
 nixos_config_dir=/mnt/home/chanel/chanel-nixos
-hostname=chanel
+hostname=acer
 
 # Check if we are running as root
 if [[ "$EUID" -ne 0 ]]; then
@@ -61,8 +61,8 @@ do_install() {
     # Create primary partition
     parted -s "$target" -- mkpart primary 512MiB 100%
 
-    boot=$(lsblk "${target}" -lno path | sed -n 2p)
-    primary=$(lsblk "${target}" -lno path | sed -n 3p)
+    boot=$(lsblk "${target}" -lno path | sed -n 3p)
+    primary=$(lsblk "${target}" -lno path | sed -n 2p)
 
     # Format disks
     mkfs.fat -F 32 -n boot "$boot"
