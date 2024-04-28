@@ -66,15 +66,15 @@ do_install() {
 
     # Format disks
     mkfs.fat -F 32 -n boot "$boot"
-    mkfs.btrfs -f -L nixos "$primary"
+    mkfs.btrfs -f -L NIXOS "$primary"
 
     # Create root Btrfs subvolume and mount for installation
-    printf "Waiting 5s for /dev/disk/by-label/nixos to appear...\n"
+    printf "Waiting 5s for /dev/disk/by-label/NIXOS to appear...\n"
     sleep 5 # wait for by-label to become populated
-    mount /dev/disk/by-label/nixos /mnt
+    mount /dev/disk/by-label/NIXOS /mnt
     btrfs subvolume create /mnt/root
     umount /mnt
-    mount /dev/disk/by-label/nixos -o subvol=root /mnt
+    mount /dev/disk/by-label/NIXOS -o subvol=root /mnt
 
     # Mount boot
     mkdir -p /mnt/boot && mount /dev/disk/by-label/boot /mnt/boot
