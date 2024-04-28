@@ -7,7 +7,7 @@ RED='\033[0;31m'
 NC='\033[0m' # No Color
 
 nixos_config_dir=/mnt/home/chanel/chanel-nixos
-hostname=acer
+hostname=chanel
 
 # Check if we are running as root
 if [[ "$EUID" -ne 0 ]]; then
