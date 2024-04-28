@@ -70,7 +70,7 @@ do_install() {
 
     # Create root Btrfs subvolume and mount for installation
     printf "Waiting 5s for /dev/disk/by-label/NIXOS to appear...\n"
-    sleep 5 # wait for by-label to become populated
+    sleep 10 # wait for by-label to become populated
     mount /dev/disk/by-label/NIXOS /mnt
     btrfs subvolume create /mnt/root
     umount /mnt
