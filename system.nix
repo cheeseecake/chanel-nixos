@@ -87,8 +87,8 @@
   services.xserver.desktopManager.gnome.enable = true;
 
   # Display: enable automatic login for the user.
-  services.xserver.displayManager.autoLogin.enable = true;
-  services.xserver.displayManager.autoLogin.user = "chanel";
+  services.displayManager.autoLogin.enable = true;
+  services.displayManager.autoLogin.user = "chanel";
   # Workaround for GNOME autologin: https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
   systemd.services."getty@tty1".enable = false;
   systemd.services."autovt@tty1".enable = false;
@@ -148,21 +148,22 @@
     dates = "weekly";
     options = "--delete-older-than 1w";
   };
-  nix.settings.auto-optimise-store = true;
   nix.optimise.automatic = true;
 
+  services.btrfs.autoScrub.fileSystems = [ "/" ];
+
   # Autoupgrades
-  system.autoUpgrade = {
-    # Default frequency is daily
-    enable = true;
-    flake = self.outPath;
-    flags = [
-      "--update-input"
-      "nixpkgs"
-      "--no-write-lock-file"
-      "-L" # print build logs
-    ];
-  };
+  # system.autoUpgrade = {
+  #   # Default frequency is daily
+  #   enable = true;
+  #   flake = self.outPath;
+  #   flags = [
+  #     "--update-input"
+  #     "nixpkgs"
+  #     "--no-write-lock-file"
+  #     "-L" # print build logs
+  #   ];
+  # };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
