@@ -102,7 +102,7 @@ do_install() {
     set +euo pipefail
 
     # Install
-    nixos-install --no-root-passwd --flake path:"$nixos_config_dir#$hostname"
+    nixos-install --flake path:"$nixos_config_dir#$hostname"
 
 }
 
