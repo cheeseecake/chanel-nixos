@@ -61,8 +61,8 @@ do_install() {
     # Create primary partition
     parted -s "$target" -- mkpart primary 512MiB 100%
 
-    boot=$(lsblk "${target}" -lno path | sed -n 3p)
-    primary=$(lsblk "${target}" -lno path | sed -n 2p)
+    boot=$(lsblk "${target}" -lno path | sed -n 2p)
+    primary=$(lsblk "${target}" -lno path | sed -n 3p)
 
     # Format disks
     mkfs.fat -F 32 -n boot "$boot"
