@@ -7,7 +7,6 @@ RED='\033[0;31m'
 NC='\033[0m' # No Color
 
 nixos_config_dir=/mnt/home/chanel/chanel-nixos
-hostname=chanel
 
 # Check if we are running as root
 if [[ "$EUID" -ne 0 ]]; then
@@ -19,6 +18,7 @@ fi
 printf "This script will setup a primary Btrfs partition and install Nix.\n\n"
 
 read -rp "Enter target disk (e.g. /dev/sda): " target
+read -rp "Enter desired hostname (e.g. chanel): " hostname
 
 printf "\n\n${RED}All data in %s will be deleted!${NC}\n\n" "$target"
 printf "Press \033[1mCtrl+C\033[0m now to abort this script, or wait 5s for the installation to continue.\n\n"
