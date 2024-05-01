@@ -38,6 +38,7 @@
   # Core system
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.kernelParams = [ "mem_sleep_default=deep" ];
   zramSwap.enable = true;
   
   # Virtualization
@@ -138,6 +139,7 @@
     knownHosts = {
       # Add your SSH known_hosts here e.g.
       # "ssh.nicholaslyz.com,server,192.168.184".publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAm3fEcDvIM7cFCjB3vzBb4YctOGMpjf8X3IxRl5HhjV";
+      "chanel-server,chanel-server,chanel-server".publicKey="chanel-server ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHXcEkJzqDxVBOZzL9DfSR5nE+D+Hx+ogDM+Pz+Npvf/";
     };
   };
 
