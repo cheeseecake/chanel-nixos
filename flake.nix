@@ -21,6 +21,7 @@
               modules = [
                 ./system.nix
                 ./hosts/${hostname}/hardware-configuration.nix
+                
                 home-manager.nixosModules.home-manager
                 { config._module.args = { inherit hostname self; }; }
                 {

@@ -186,6 +186,10 @@
       use-system-font = false;
       custom-font = "JetBrainsMonoNL Nerd Font 12";
     };
+
+    "org/gnome/desktop/peripherals/touchpad" = {
+      tap-to-click = true;
+    };
   };
 
 
