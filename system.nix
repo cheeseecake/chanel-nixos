@@ -112,6 +112,10 @@
       extraGroups = [ "networkmanager" "wheel" "libvirtd" ];
     };
   };
+  
+  # Disable tracker miners
+  services.gnome.tracker-miners.enable = false;
+  services.gnome.tracker.enable =  false;
 
   # Fix login keyring
   services.gnome.gnome-keyring.enable = true;
