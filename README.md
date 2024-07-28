@@ -49,6 +49,7 @@ After that:
 - To switch (write to boot record, will persist across boots): `sudo nixos-rebuild switch --flake path:.#chanel`
 - To update the lockfile: `nix flake update`
 - To test in a VM: `sudo nixos-rebuild build-vm --flake path:.#chanel`
+- 20240728: To allow install of insecure/ EOL pkgs (e.g. electron for logseq): `sudo NIXPKGS_ALLOW_INSECURE=1 nixos-rebuild switch --flake path:. --impure`
 
 
 ## References

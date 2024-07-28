@@ -95,7 +95,6 @@
   systemd.services."autovt@tty1".enable = false;
 
   # Sound
-  sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -122,11 +121,11 @@
   security.pam.services.sddm.enableGnomeKeyring = true;
 
   # Remove some gnome packages I don't use
-  environment.gnome.excludePackages = with pkgs.gnome; [
+  environment.gnome.excludePackages = with pkgs; [
     epiphany # browser, use firefox instead
     geary # mail reader
-    gnome-shell-extensions # This seems to remove default gnome extensions I don't use
-    pkgs.gnome-tour
+    gnome.gnome-shell-extensions # This seems to remove default gnome extensions I don't use
+    gnome-tour
     totem # video player, use vlc instead
   ];
 
