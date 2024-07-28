@@ -10,11 +10,6 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.allowUnfree = true;
 
-  # TEMPORARY WORKAROUND
-  nixpkgs.config.permittedInsecurePackages = [
-    "electron-25.9.0"
-  ];
-
   # GPU
   hardware.opengl.extraPackages = with pkgs; [
     intel-media-driver
