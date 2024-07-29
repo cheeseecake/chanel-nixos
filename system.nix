@@ -11,7 +11,7 @@
   nixpkgs.config.allowUnfree = true;
 
   # GPU
-  hardware.opengl.extraPackages = with pkgs; [
+  hardware.graphics.extraPackages = with pkgs; [
     intel-media-driver
     intel-compute-runtime
   ];
@@ -40,6 +40,7 @@
   zramSwap.memoryPercent = 100;
   
   # Virtualization
+  virtualisation.docker.enable = true;
   # virtualisation.libvirtd.enable = true;
   # programs.virt-manager.enable = true;
   # virtualisation.spiceUSBRedirection.enable = true;
@@ -52,7 +53,7 @@
     spice-protocol
     win-virtio
     win-spice
-    gnome.adwaita-icon-theme
+    adwaita-icon-theme
   ];
   ## Manage the virtualisation services
   virtualisation = {
@@ -106,7 +107,7 @@
     users.chanel = {
       isNormalUser = true;
       description = "chanel";
-      extraGroups = [ "networkmanager" "wheel" "libvirtd" ];
+      extraGroups = [ "networkmanager" "wheel" "libvirtd" "docker" ];
     };
   };
   
