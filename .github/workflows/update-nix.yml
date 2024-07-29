@@ -1,0 +1,29 @@
+name: Update Nix flake.lock, test & commit
+on:
+  schedule:
+    - cron: "0 16 * * *" # 00:00 SGT daily
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-flake:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Nix
+        uses: cachix/install-nix-action@V27
+
+      - name: Update flake.lock file
+        run: nix flake update
+
+      - name: Run tests for all hosts
+        run: nix flake check
+      
+      - name: Commit
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Update flake.lock"

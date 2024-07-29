@@ -10,11 +10,6 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.allowUnfree = true;
 
-  # TEMPORARY WORKAROUND
-  nixpkgs.config.permittedInsecurePackages = [
-    "electron-25.9.0"
-  ];
-
   # GPU
   hardware.opengl.extraPackages = with pkgs; [
     intel-media-driver
@@ -40,6 +35,9 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelParams = [ "mem_sleep_default=deep" ];
   zramSwap.enable = true;
+
+  # Increase zram to 100% of RAM
+  zramSwap.memoryPercent = 100;
   
   # Virtualization
   # virtualisation.libvirtd.enable = true;
@@ -116,9 +114,7 @@
   services.gnome.tracker-miners.enable = false;
   services.gnome.tracker.enable =  false;
 
-  # Fix login keyring
   services.gnome.gnome-keyring.enable = true;
-  security.pam.services.sddm.enableGnomeKeyring = true;
 
   # Remove some gnome packages I don't use
   environment.gnome.excludePackages = with pkgs; [
@@ -146,29 +142,34 @@
     };
   };
 
-  # Optimization
+  # Save space
   boot.loader.systemd-boot.configurationLimit = 10;
   nix.gc = {
+    # Deletes old generations
     automatic = true;
     dates = "weekly";
     options = "--delete-older-than 1w";
   };
+
+  # Optimization: symlink identical files in store
   nix.optimise.automatic = true;
 
-  services.btrfs.autoScrub.fileSystems = [ "/" ];
+  # Run btrfs scrub automatically to check disk for errors
+  services.btrfs.autoScrub = {
+    enable = true;
+    fileSystems = [ "/" ];
+  };
 
   # Autoupgrades
-  # system.autoUpgrade = {
-  #   # Default frequency is daily
-  #   enable = true;
-  #   flake = self.outPath;
-  #   flags = [
-  #     "--update-input"
-  #     "nixpkgs"
-  #     "--no-write-lock-file"
-  #     "-L" # print build logs
-  #   ];
-  # };
+  system.autoUpgrade = {
+    enable = true;
+    flake = "github:extrange/chanel-nixos"; # fetch config from github
+    dates = "*-*-* 05:00:00";
+    operation = "switch"; # Upgrade immediately
+    persistent = true;
+    randomizedDelaySec = "45min";
+    flags = [ "-L" ]; # Print full build logs on stderr
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
