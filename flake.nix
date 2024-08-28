@@ -11,7 +11,33 @@
 
   outputs = { nixpkgs, home-manager, self, ... }:
     with builtins;
+    with nixpkgs.lib;
     {
+      # This builds all derivations here on `nix flake check`.
+      # https://github.com/NixOS/nix/issues/7165
+      checks =
+        let
+          # Shape:
+          # [
+          #   {x86_64-linux: {name = desktop; value = desktopConfig;}}
+          #   {x86_64-linux: {name = laptop; value = laptopConfig;}}
+          #   ...
+          # ]
+          systems = mapAttrsToList
+            (hostname: type:
+              let
+                config = self.nixosConfigurations.${hostname}.config.system.build.toplevel;
+                system = config.system;
+              in
+              {
+                ${system} = { name = hostname; value = config; };
+              })
+            (readDir ./hosts);
+        in
+        # Shape:
+          # {x86_64-linux = {desktop = desktopConfig; laptop: laptopConfig;}}
+        zipAttrsWith (system: listToAttrs) systems;
+
       nixosConfigurations =
         # Get hostnames by reading folder name in hosts/
         (
@@ -21,7 +47,7 @@
               modules = [
                 ./system.nix
                 ./hosts/${hostname}/hardware-configuration.nix
-                
+
                 home-manager.nixosModules.home-manager
                 { config._module.args = { inherit hostname self; }; }
                 {
