@@ -121,7 +121,7 @@
   environment.gnome.excludePackages = with pkgs; [
     epiphany # browser, use firefox instead
     geary # mail reader
-    gnome.gnome-shell-extensions # This seems to remove default gnome extensions I don't use
+    gnome-shell-extensions # This seems to remove default gnome extensions I don't use
     gnome-tour
     totem # video player, use vlc instead
   ];
