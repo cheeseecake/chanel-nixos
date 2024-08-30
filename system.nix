@@ -139,7 +139,7 @@
     knownHosts = {
       # Add your SSH known_hosts here e.g.
       # "ssh.nicholaslyz.com,server,192.168.184".publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAm3fEcDvIM7cFCjB3vzBb4YctOGMpjf8X3IxRl5HhjV";
-      "chanel-server,chanel-server,chanel-server".publicKey="chanel-server ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHXcEkJzqDxVBOZzL9DfSR5nE+D+Hx+ogDM+Pz+Npvf/";
+      "chanel-server".publicKey="chanel-server ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHXcEkJzqDxVBOZzL9DfSR5nE+D+Hx+ogDM+Pz+Npvf/";
     };
   };
 
@@ -164,10 +164,10 @@
   # Autoupgrades
   system.autoUpgrade = {
     enable = true;
-    flake = "github:extrange/chanel-nixos"; # fetch config from github
-    dates = "*-*-* 05:00:00";
+    flake = "github:cheeseecake/chanel-nixos"; # fetch config from github
+    dates = "Sun *-*-* 05:00:00"; # Upgrade weekly on Sunday
     operation = "switch"; # Upgrade immediately
-    persistent = true;
+    persistent = true; # If system wasn't online at upgrade time, update on next boot
     randomizedDelaySec = "45min";
     flags = [ "-L" ]; # Print full build logs on stderr
   };
