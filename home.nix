@@ -78,7 +78,7 @@
       mtr # ping + tracert TUI
       neofetch
       nil # Nix language server for vscode
-      nixpkgs-fmt # Nix formatter
+      nixfmt-rfc-style # Nix formatter
       nmap
       p7zip
       parted
