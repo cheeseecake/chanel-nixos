@@ -2,12 +2,20 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, self, hostname, ... }:
+{
+
+  pkgs,
+  hostname,
+  ...
+}:
 
 {
 
   # Nix
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
   nixpkgs.config.allowUnfree = true;
 
   # GPU
@@ -38,7 +46,7 @@
 
   # Increase zram to 100% of RAM
   zramSwap.memoryPercent = 100;
-  
+
   # Virtualization
   virtualisation.docker.enable = true;
   # virtualisation.libvirtd.enable = true;
@@ -49,7 +57,8 @@
     virtiofsd
     virt-manager
     virt-viewer
-    spice spice-gtk
+    spice
+    spice-gtk
     spice-protocol
     win-virtio
     win-spice
@@ -107,13 +116,18 @@
     users.chanel = {
       isNormalUser = true;
       description = "chanel";
-      extraGroups = [ "networkmanager" "wheel" "libvirtd" "docker" ];
+      extraGroups = [
+        "networkmanager"
+        "wheel"
+        "libvirtd"
+        "docker"
+      ];
     };
   };
-  
+
   # Disable tracker miners
   services.gnome.tracker-miners.enable = false;
-  services.gnome.tracker.enable =  false;
+  services.gnome.tracker.enable = false;
 
   services.gnome.gnome-keyring.enable = true;
 
@@ -134,12 +148,13 @@
     };
 
   };
-
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = [ ];
   programs.ssh = {
     knownHosts = {
       # Add your SSH known_hosts here e.g.
       # "ssh.nicholaslyz.com,server,192.168.184".publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAm3fEcDvIM7cFCjB3vzBb4YctOGMpjf8X3IxRl5HhjV";
-      "chanel-server".publicKey="chanel-server ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHXcEkJzqDxVBOZzL9DfSR5nE+D+Hx+ogDM+Pz+Npvf/";
+      "chanel-server".publicKey = "chanel-server ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHXcEkJzqDxVBOZzL9DfSR5nE+D+Hx+ogDM+Pz+Npvf/";
     };
   };
 
@@ -179,6 +194,5 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.05"; # Did you read the comment?
-
 
 }

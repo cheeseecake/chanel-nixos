@@ -1,4 +1,8 @@
-{ config, pkgs, lib, nnn, ... }:
+{
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   # General settings
@@ -21,85 +25,91 @@
 
   };
 
-  home.packages = with pkgs;
-    [
-      # Desktop programs
-      calibre
-      firefox
-      gimp
-      gnome-extension-manager
-      jellyfin-media-player
-      libreoffice
-      logseq
-      moonlight-qt
-      obs-studio
-      syncthing
-      telegram-desktop
-      ungoogled-chromium
-      vlc
-      vscode
-      zoom-us
+  home.packages = with pkgs; [
+    # Desktop programs
+    calibre
+    firefox
+    gimp
+    gnome-extension-manager
+    jellyfin-media-player
+    libreoffice
+    (logseq.override { electron = pkgs.electron; })
+    moonlight-qt
+    obs-studio
+    syncthing
+    telegram-desktop
+    ungoogled-chromium
+    vlc
+    vscode
+    zoom-us
 
-      # Gnome Extensions
-      gnomeExtensions.blur-my-shell
-      gnomeExtensions.clipboard-indicator
-      gnomeExtensions.dash-to-dock
-      gnomeExtensions.fullscreen-avoider
-      gnomeExtensions.gsconnect
-      gnomeExtensions.tailscale-status
-      gnomeExtensions.vitals
+    # Gnome Extensions
+    gnomeExtensions.blur-my-shell
+    gnomeExtensions.clipboard-indicator
+    gnomeExtensions.dash-to-dock
+    gnomeExtensions.fullscreen-avoider
+    gnomeExtensions.gsconnect
+    gnomeExtensions.tailscale-status
+    gnomeExtensions.vitals
 
-      # Fonts
-      (nerdfonts.override { fonts = [ "JetBrainsMono" "FiraCode" ]; })
-      open-sans
-      source-sans
-      jetbrains-mono # has ligatures
+    # Fonts
+    (nerdfonts.override {
+      fonts = [
+        "JetBrainsMono"
+        "FiraCode"
+      ];
+    })
+    open-sans
+    source-sans
+    jetbrains-mono # has ligatures
 
-      # Command line
-      age
-      bat
-      btop
-      btrfs-progs
-      ffmpeg
-      file
-      fzf
-      gh
-      git
-      hunspell # libreoffice spellcheck
-      hunspellDicts.en-us
-      libheif
-      libsecret # for github auth
-      libva-utils # vaainfo, check on VAAPI (hw acceleration)
-      lm_sensors # for `sensors` command
-      lsd # ls replacement with icons
-      lsof
-      lsscsi
-      ltrace # library call monitoring
-      mtr # ping + tracert TUI
-      neofetch
-      nil # Nix language server for vscode
-      nixfmt-rfc-style # Nix formatter
-      nmap
-      p7zip
-      parted
-      pciutils # lspci
-      ripgrep # recursively searches directories for a regex pattern
-      smartmontools
-      socat
-      ssh-to-age
-      sops
-      strace # system call monitoring
-      sysstat
-      tree
-      unzip
-      usbutils # lsusb
-      vim
-      which
-      xz
-      yt-dlp
-      zip
-      zstd
-    ];
+    # Command line
+    age
+    bat
+    btop
+    btrfs-progs
+    ffmpeg
+    file
+    fzf
+    gh
+    git
+    hunspell # libreoffice spellcheck
+    hunspellDicts.en-us
+    iw
+    libheif
+    libsecret # for github auth
+    libva-utils # vaainfo, check on VAAPI (hw acceleration)
+    lm_sensors # for `sensors` command
+    lsd # ls replacement with icons
+    lsof
+    lsscsi
+    ltrace # library call monitoring
+    mtr # ping + tracert TUI
+    neofetch
+    nixd # Nix language server for vscode
+    nixfmt-rfc-style # Nix formatter
+    nmap
+    p7zip
+    parted
+    pciutils # lspci
+    ripgrep # recursively searches directories for a regex pattern
+    smartmontools
+    socat
+    ssh-to-age
+    sops
+    strace # system call monitoring
+    sysstat
+    tree
+    unzip
+    usbutils # lsusb
+    vim
+    wavemon
+    which
+    xz
+    yt-dlp
+    zip
+    zstd
+  ];
 
   # Application-specific config
   programs = {
@@ -190,7 +200,6 @@
       tap-to-click = true;
     };
   };
-
 
   # Run as user, ivo possible permission issues if run as system
   services.syncthing.enable = true;
