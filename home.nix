@@ -28,6 +28,7 @@
   home.packages = with pkgs; [
     # Desktop programs
     calibre
+    ddcutil
     firefox
     gimp
     gnome-extension-manager
@@ -51,6 +52,7 @@
     gnomeExtensions.gsconnect
     gnomeExtensions.tailscale-status
     gnomeExtensions.vitals
+    gnomeExtensions.brightness-control-using-ddcutil
 
     # Fonts
     (nerdfonts.override {
@@ -176,6 +178,7 @@
         "gsconnect@andyholmes.github.io"
         "tailscale-status@maxgallup.github.com"
         "Vitals@CoreCoding.com"
+        "display-brightness-ddcutil@themightydeity.github.com"
       ];
 
     };
