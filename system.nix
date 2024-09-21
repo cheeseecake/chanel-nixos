@@ -23,7 +23,13 @@
     intel-media-driver
     intel-compute-runtime
   ];
-
+  
+  # For ddcutil (monitor brightness control)
+  boot.kernelModules = [ "i2c-dev" ];
+  services.udev.extraRules = ''
+    SUBSYSTEM=="i2c-dev", KERNEL=="i2c-[0-9]*", ATTRS{class}=="0x030000", TAG+="uaccess"
+    SUBSYSTEM=="dri", KERNEL=="card[0-9]*", TAG+="uaccess"
+  '';
   time.timeZone = "Asia/Singapore";
   i18n.defaultLocale = "en_SG.UTF-8";
   i18n.extraLocaleSettings = {
