@@ -35,6 +35,7 @@
     jellyfin-media-player
     libreoffice
     (logseq.override { electron = pkgs.electron; })
+    lutris
     moonlight-qt
     obs-studio
     syncthing
@@ -42,6 +43,7 @@
     ungoogled-chromium
     vlc
     vscode
+    wineWowPackages.waylandFull
     zoom-us
 
     # Gnome Extensions
