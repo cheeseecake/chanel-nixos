@@ -34,7 +34,7 @@
     gnome-extension-manager
     jellyfin-media-player
     libreoffice
-    (logseq.override { electron = pkgs.electron; })
+    logseq
     lutris
     moonlight-qt
     obs-studio
