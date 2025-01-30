@@ -194,7 +194,7 @@
 
     "org/gnome/Console" = {
       use-system-font = false;
-      custom-font = "JetBrainsMonoNL Nerd Font 12";
+      custom-font = "JetBrains Mono NL 12";
     };
 
     "org/gnome/desktop/peripherals/touchpad" = {
