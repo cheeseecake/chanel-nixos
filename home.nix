@@ -42,7 +42,6 @@
     telegram-desktop
     ungoogled-chromium
     vlc
-    vscode
     wineWowPackages.waylandFull
     zoom-us
 
