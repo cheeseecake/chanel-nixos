@@ -42,7 +42,6 @@
     telegram-desktop
     ungoogled-chromium
     vlc
-    vscode
     wineWowPackages.waylandFull
     zoom-us
 
@@ -126,6 +125,24 @@
 
     # Prettier shell prompt
     starship.enable = true;
+
+    vscode = {
+      # See settings here
+      # https://github.com/nix-community/home-manager/blob/master/modules/programs/vscode.nix
+      enable = true;
+
+      # Workaround for continue.dev extension not working
+      # We use vscode.fhs as continue uses libstdc++
+      package = pkgs.vscode.fhsWithPackages (ps: [
+        (ps.openssh.overrideAttrs (prev: {
+          # Fix remote-ssh not working on vscode.fhs
+          # https://github.com/nix-community/home-manager/issues/322
+          patches = (prev.patches or [ ]) ++ [ ./openssh-nocheckcfg.patch ];
+        }))
+      ]);
+      # Note: sudo doesn't work in vscode.fhs
+      # https://discourse.nixos.org/t/sudo-does-not-work-from-within-vscode-fhs/14227/2
+    };
   };
 
   # Gnome settings
